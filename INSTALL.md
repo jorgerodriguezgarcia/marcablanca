@@ -6,7 +6,7 @@ PHP 8.1 y Composer 2
 
 ## Instalación repositorio y dependencias
 ````
-git clone https://github.com/jorgerodriguezgarcia/marcablanca.git
+git clone https://github.com/jorgerodriguezgarcia/marcablanca.git -b master
 cd marcablanca
 composer install
 ````
