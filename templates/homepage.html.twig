@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{%  block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/modal.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ member.pathToCssDirectory }}/reset.css" type="text/css" media="screen,projection">
+    <link rel="stylesheet" href="{{ member.pathToCssDirectory }}/estilos.css" type="text/css" media="screen,projection">
+{%  endblock stylesheet %}
+
+{%  block javascript %}
+    <script type="application/javascript" src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
+{%  endblock javascript %}
+
+{%  block logo %}
+        <h1 class="logo-sitio"><a href="#" title="{{ member.websiteName }}">{{ member.websiteName }}</a></h1>
+{%  endblock logo %}
+
+{% block content %}
+
+{% set totalThumbs = smallThumbs|length + bigThumbs|length %}
+{% set indexBigThumb = 0 %}
+{% set indexSmallThumb = 0 %}
+{% set isOdd = true %}
+
+<div class="listado-chicas">
+
+    {% for i in 1..totalThumbs %}
+        {% if i in {0:6 ,1:18, 2:30, 3:45, 4:54} %}
+            <div class="chica chica-grande {% if not isOdd %}grande-derecha{% endif %}">
+                <a class="link" href="#" title="" data-modal-href="{{ path("modalwebcam", {permalink: bigThumbs[indexBigThumb].permalink, nats:member.natsTrackingCodeForWebcams }) }}">
+                    <span class="thumb"><img src="{{ urlImage }}/{{ bigThumbs[indexBigThumb].thumb4 }}" width="357" height="307" alt="" title="" /></span>
+                    <span class="nombre-chica"> <span class="{%if smallThumbs[indexSmallThumb].online %}ico-online{% else %}ico-offline{% endif %}"></span>{{ bigThumbs[indexBigThumb].nick }}</span>
+                    <span id="favorito" class="ico-favorito" ></span>
+                </a>
+            </div>
+            {% set indexBigThumb = indexBigThumb +1 %}
+            {% set isOdd = not isOdd %}
+        {% else %}
+            <div class="chica">
+                <a class="link" href="#" title="" data-modal-href="{{ path("modalwebcam", {permalink: smallThumbs[indexSmallThumb].permalink, nats:member.natsTrackingCodeForWebcams }) }}">
+                    <span class="thumb"><img src="{{ urlImage }}/{{ smallThumbs[indexSmallThumb].thumb1 }}" width="175" height="150" alt="" title="" /></span>
+                    <span class="nombre-chica"> <span class="{%if smallThumbs[indexSmallThumb].online %}ico-online{% else %}ico-offline{% endif %}"></span> {{ smallThumbs[indexSmallThumb].nick }}</span>
+                    <span id="favorito" class="ico-favorito" ></span>
+                </a>
+            </div>
+            {% set indexSmallThumb = indexSmallThumb +1 %}
+        {% endif %}
+    {% endfor %}
+
+    <div class="clear"></div>
+
+    <a class="btn-mas-modelos" href="#" title="Mostrar más modelos">Siguiente Página</a>
+
+</div>
+<!-- termina LISTADO DE CHICAS -->
+{% endblock content %}
+
+
+{% block modal %}
+<div id="modal-wrapper">
+    <div id="modal-overlay"></div>
+    <div id="modal">
+        <div id="close">X</div>
+        <iframe src></iframe>
+    </div>
+</div>
+
+<script>
+    $(".chica a.link").click(function() {
+        $("iframe").attr("src",$(this).data("modal-href"));
+        $("#modal-wrapper").show();
+    });
+
+    $("#close").click(function() {
+        $("#modal-wrapper").hide()
+        $("iframe")[0].contentWindow.document.write("")
+    });
+</script>
+<!-- termina modal -->
+{% endblock modal %}

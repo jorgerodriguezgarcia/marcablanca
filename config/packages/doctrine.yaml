@@ -12,9 +12,10 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
+                dir: '%kernel.project_dir%/src/Infraestructure/Persistence/Doctrine'
+                prefix: 'App\Domain\Entity'
                 alias: App
+                type: xml
 
 when@test:
     doctrine:

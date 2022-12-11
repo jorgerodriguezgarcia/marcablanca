@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Domain\Entity\Webcam">
+    <id name="id" type="integer"></id>
+    <field name="twitter" type="string" nullable="true"/>
+    <field name="nick" type="string" nullable="true"/>
+    <field name="permalink" type="string" nullable="true"/>
+    <field name="online" type="boolean" nullable="true"/>
+    <field name="birthdate" type="date" nullable="true"/>
+    <field name="height" type="float" nullable="true"/>
+    <field name="country" type="string" nullable="true"/>
+    <field name="system" type="integer" nullable="true"/>
+    <field name="systemId" type="integer" nullable="true"/>
+    <field name="thumb1" type="string" nullable="true"/>
+    <field name="thumb2" type="string" nullable="true"/>
+    <field name="thumb3" type="string" nullable="true"/>
+    <field name="thumb4" type="string" nullable="true"/>
+    <field name="active" type="boolean" nullable="true"/>
+    <field name="live" type="boolean" nullable="true"/>
+    <field name="new" type="boolean" nullable="true"/>
+    <field name="banned" type="date" nullable="true"/>
+    <field name="ranking" type="integer" nullable="true"/>
+    <field name="lastLogin" type="datetime" nullable="true"/>
+    <field name="register" type="date" nullable="true"/>
+    <field name="pHd" type="integer" nullable="true"/>
+    <field name="pAudio" type="integer" nullable="true"/>
+    <field name="dtRate" type="float" nullable="true"/>
+    <field name="espSwf" type="string" nullable="true"/>
+    <field name="videos" type="string" nullable="true"/>
+    <field name="positionOnline" type="float" nullable="true"/>
+    <field name="position" type="float" nullable="true"/>
+    <field name="soft" type="integer" nullable="true"/>
+    <field name="languages" type="string" nullable="true"/>
+    <field name="webcamPosition" type="integer" nullable="true"/>
+    <field name="lastUpdate" type="datetime" nullable="true"/>
+  </entity>
+</doctrine-mapping>
