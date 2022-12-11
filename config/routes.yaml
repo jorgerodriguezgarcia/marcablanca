@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+homepage:
+    path: /
+    controller: App\Infraestructure\Controller\HomePage:__invoke
+
+modalwebcam:
+    path: /modalWebcam/{permalink}
+    controller: App\Infraestructure\Controller\ModalWebcam:__invoke

@@ -1,19 +1,27 @@
 <?php
 
-
 namespace App\Domain\Entity;
 
+use App\Shared\Domain\Aggregate\AggregateRoot;
 
-class Member
+
+class Member extends AggregateRoot
 {
-    private $id;
-    private $name;
-    private $websiteName;
-    private $websiteUrl;
-    private $natsTrackingCodeForWebcams;
-    private $natsTrackingCodeForMainPage;
-    private $pathToCssDirectory;
-    private $googleAnalyticsIdentifier;
+    private ?string $name = null;
+
+    private ?string $websiteName = null;
+
+    private ?string $websiteUrl = null;
+
+    private ?string $natsTrackingCodeForWebcams = null;
+
+    private ?string $natsTrackingCodeForMainPage = null;
+
+    private ?string $pathToCssDirectory = null;
+
+    private ?string $googleAnalyticsIdentifier = null;
+
+    private ?int $id = null;
 
     public function getName(): ?string
     {
@@ -103,4 +111,4 @@ class Member
     {
         return $this->id;
     }
-}//class
+}

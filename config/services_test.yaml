@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+  App\Tests\:
+    resource: "../tests/"
+
+  App\Infraestructure\Persistence\MysqlWebcamRepository:
+    public: true
+
+  App\Infraestructure\Persistence\MysqlMemberRepository:
+    public: true
+
+  App\Domain\Repository\WebcamRepository: '@App\Tests\UnitTest\InMemoryWebcamRepository'
+  Symfony\Contracts\HttpClient\HttpClientInterface:
+    alias: 'App\Tests\UnitTest\InMemoryClient'
+    public: true
+
+
+

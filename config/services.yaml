@@ -5,50 +5,29 @@ services:
     
     # Configure
     _instanceof:
-        App\Shared\Domain\Bus\Event\DomainEventSubscriber:
-            tags: ['domain_event_subscriber']
-        
         App\Shared\Domain\Bus\Command\CommandHandler:
             tags: ['command_handler']
         
         App\Shared\Domain\Bus\Query\QueryHandler:
             tags: ['query_handler']
-    
-    App\Infraestructure\Controller\:
-        resource: '../src/Infraestructure/Controller'
-        tags: ['controller.service_arguments']
-    
-    
-    # Wire
+
+
     App\Shared\:
         resource: '../src/Shared'
 
-    # -- TAGGING --
-    App\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:
-        arguments: [!tagged domain_event_subscriber]
-        lazy: true
-    
-    App\Shared\Infrastructure\Bus\Event\DomainEventMapping:
-        arguments: [!tagged domain_event_subscriber]
-    
-    App\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator:
-        arguments: [!tagged domain_event_subscriber]
-    
-    App\Shared\Infrastructure\Doctrine\DatabaseConnections:
-        arguments: [!tagged database_connection]
-    
-    App\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-    
-    App\Shared\Infrastructure\Symfony\ApiExceptionListener:
-        tags:
-            - { name: kernel.event_listener, event: kernel.exception, method: onException }
-    
-    App\Shared\Infrastructure\Symfony\BasicHttpAuthMiddleware:
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-    
+    # Wire
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Shared/'
+            - '../src/Kernel.php'
+            - '../src/Domain/Entity'
+
+    App\Infraestructure\Controller\:
+        resource: '../src/Infraestructure/Controller'
+        tags: [ 'controller.service_arguments' ]
+
+
     # -- APP DEFINITIONS --
     # Command/Query Handlers
     App\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
@@ -58,4 +37,5 @@ services:
         arguments: [!tagged query_handler]
 
     # -- IMPLEMENTATIONS SELECTOR --
-    App\Shared\Domain\Bus\Event\EventBus: '@App\Shared\Infrastructure\Bus\Event\WithMonitoring\WithPrometheusMonitoringEventBus'
+    App\Shared\Domain\Bus\Query\QueryBus: '@App\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus'
+    App\Shared\Domain\Bus\Command\CommandBus: '@App\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus'
