@@ -67,6 +67,13 @@ Reiniciar apache
 service apache2 reload
 ````
 
+## Configurar los hosts del sistema para poder probar las webs
+````
+127.0.0.1 www.cerdas.com
+127.0.0.1 www.babosas.com
+127.0.0.1 www.conejox.com
+````
+
 ## Configurar caches de webcams
 Añadir a crontab el siguiente comando
 ````
@@ -76,9 +83,13 @@ crontab -e -u www-data
 * * * * * php bin/console app:cache-all-webcams
 ````
 
-## Lanzar test
+## Lanzar test (esperar 1 minuto a que se ejecute CRON)
 ````
 php bin/phpunit
 ````
+
+## Pruebas desde el navegador
+Puedes probar los dominios configurados en el host anteriormente
+
 
 
