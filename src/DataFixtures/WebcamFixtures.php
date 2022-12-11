@@ -10,6 +10,8 @@ class WebcamFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        if ($_ENV["APP_ENV"]!=="test") return;
+
         $lastUpdate = new \DateTime();
 
         $webcam = (new Webcam())
